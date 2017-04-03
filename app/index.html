@@ -1,81 +1,112 @@
-<!DOCTYPE html>
-<html lang="en" >
+<!doctype html>
+<html lang="en">
   <head>
-    <title>stl.cool - Gateway Arc</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>stl.cool</title>
+    <!-- Disable tap highlight on IE -->
+    <meta name="msapplication-tap-highlight" content="no">
+    <!-- Web Application Manifest -->
+    <link rel="manifest" href="manifest.json">
 
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="STL.COOL">
+    <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Web Starter Kit">
+    <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png">
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#1B1B1B">
+    <!-- Color the status bar on mobile devices -->
+    <meta name="theme-color" content="#1B1B1B">
+    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
     <link rel="stylesheet" href="styles/angular-material.css"/>
-    <link rel="stylesheet" href="styles/main.css"/>
-    <link rel="stylesheet" href="app/main.css"/>
+
+    <link rel="stylesheet" href="styles/app.css"/>
   </head>
+  <body ng-app="starterApp" layout="column" ng-controller="UserController as ul">
 
-
-  <body ng-app="starterApp" layout="column">
-
-    <md-toolbar layout="row">
-      <h3>stl.cool - Gateway Arc</h3>
+    <md-toolbar layout="row" class="md-whiteframe-4dp">
+      <md-button class="menu" hide-gt-sm ng-click="ul.toggleList()" >
+        <md-icon md-svg-icon="menu" ></md-icon>
+      </md-button>
+      <h3>Cloud Arc Tools</h3>
     </md-toolbar>
 
     <div flex layout="row">
 
-        <md-sidenav md-is-locked-open="true" class="md-whiteframe-z2">
+        <md-sidenav md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" ng-click="ul.toggleList()" class="md-whiteframe-4dp" >
           <md-list>
-
-            <md-list-item >
-                <md-button>
-                  <md-icon md-svg-src="./assets/svg/avatar-1.svg" class="avatar"></md-icon>
-                  Lia Luogo
+            <md-list-item ng-repeat="u in ul.users">
+                <md-button ng-click="ul.selectUser(u)" ng-class="{'selected' : u === ul.selected }">
+                  <md-icon md-svg-icon="{{u.avatar}}" class="avatar"></md-icon>
+                  {{u.name}}
                 </md-button>
             </md-list-item>
-
-            <md-list-item >
-                <md-button>
-                  <md-icon md-svg-src="./assets/svg/avatar-4.svg" class="avatar"></md-icon>
-                  Lawrence Ray
-                </md-button>
-            </md-list-item>
-
           </md-list>
         </md-sidenav>
 
         <md-content flex id="content">
-          <md-icon md-svg-icon="./assets/svg/avatar-1.svg" class="avatar"></md-icon>
-          <h2>Lia Luogo</h2>
-          <p>
-            I love cheese, especially airedale queso. Cheese and biscuits halloumi cauliflower cheese cottage cheese
-            swiss boursin fondue caerphilly. Cow port-salut camembert de normandie macaroni cheese feta who moved my
-            cheese babybel boursin. Red leicester roquefort boursin squirty cheese jarlsberg blue castello caerphilly
-            chalk and cheese. Lancashire.
-          </p>
+          <md-icon md-svg-icon="{{ul.selected.avatar}}" class="avatar"></md-icon>
+          <h2 class="md-display-2">{{ul.selected.name}}</h2>
+          <p class="md-headline">{{ul.selected.content}}</p>
+
+          <md-button class="share" md-no-ink ng-click="ul.makeContact(ul.selected)" >
+            <md-icon md-svg-icon="share"></md-icon>
+          </md-button>
         </md-content>
 
     </div>
-
+    <!--
     <script src="../node_modules/angular/angular.js"></script>
     <script src="../node_modules/angular-animate/angular-animate.js"></script>
     <script src="../node_modules/angular-aria/angular-aria.js"></script>
-    <script src="../node_modules/angular-material/angular-material.js"></script>
-
-    <!-- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.14/angular.min.js"></script>
+    <script type="text/javascript" src="../node_modules/angular-material/angular-material.js"></script>
+     -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.14/angular.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.14/angular-animate.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.14/angular-aria.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.14/angular-messages.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.1/angular-material.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.14/angular-messages.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
-    <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script> -->
+    <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+    <script src="./src/Users.js"></script>
+    <script src="./src/UserController.js"></script>
+    <script src="./src/UserService.js"></script>
     <script type="text/javascript">
 
       angular
-          .module('starterApp', ['ngMaterial'])
-          .run(function($log){
-            $log.debug("starterApp + ngMaterial running...");
-          });
+        .module('starterApp', ['ngMaterial', 'users'])
+        .config(function($mdThemingProvider, $mdIconProvider){
+
+          $mdThemingProvider.theme('default')
+              .dark()
+              .primaryPalette('pink')
+              .accentPalette('indigo');
+
+          $mdIconProvider
+              .defaultIconSet("./assets/svg/avatars.svg", 128)
+              .icon("menu"       , "./assets/svg/menu.svg"        , 24)
+              .icon("share"      , "./assets/svg/share.svg"       , 24)
+              .icon("google_plus", "./assets/svg/google_plus.svg" , 512)
+              .icon("hangouts"   , "./assets/svg/hangouts.svg"    , 512)
+              .icon("twitter"    , "./assets/svg/twitter.svg"     , 512)
+              .icon("phone"      , "./assets/svg/phone.svg"       , 512);
+
+        });
 
     </script>
+
     <script>
       // Initialize the Firebase SDK
       var config = {
@@ -86,7 +117,6 @@
         messagingSenderId: "67914260758"
       };
       firebase.initializeApp(config);
-    </script>  
-
+    </script>
   </body>
 </html>
