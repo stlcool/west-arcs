@@ -31,7 +31,7 @@
     -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
     <link rel="stylesheet" href="styles/angular-material.css"/>
-
+    <link rel="stylesheet" href="styles/app.css"/>
     <link rel="stylesheet" href="styles/main.css"/>
   </head>
   <body ng-app="starterApp" layout="column" ng-controller="UserController as ul">
@@ -40,7 +40,7 @@
       <md-button class="menu" hide-gt-sm ng-click="ul.toggleList()" >
         <md-icon md-svg-icon="menu" ></md-icon>
       </md-button>
-      <h3>Cloud Arc Tools</h3>
+      <h3>The pragmatist papers</h3>
     </md-toolbar>
 
     <div flex layout="row">
@@ -57,11 +57,24 @@
         </md-sidenav>
 
         <md-content flex id="content">
+        <md-card>
+          <img class="md-card-image" src="{{ ul.selected.avatar }}" alt="image caption">
+          <md-card-content>
+            <h2>Card headline</h2>
+            <p>Card content</p>
+          </md-card-content>
+          <md-card-footer>
+          Card footer
+          </md-card-footer>
+          <div class="md-actions" layout="row|column" layout-align="start|end|center start|end|center">
+             <md-button>content</md-button>
+           </div>
+        </md-card>
           <md-icon md-svg-icon="{{ul.selected.avatar}}" class="avatar"></md-icon>
           <h2 class="md-display-2">{{ul.selected.name}}</h2>
           <p class="md-headline">{{ul.selected.content}}</p>
 
-          <md-button class="share" md-no-ink ng-click="ul.makeContact(ul.selected)" >
+          <md-button class="md-fab md-secondary" md-no-ink ng-click="ul.makeContact(ul.selected)" >
             <md-icon md-svg-icon="share"></md-icon>
           </md-button>
         </md-content>
@@ -90,8 +103,8 @@
         .config(function($mdThemingProvider, $mdIconProvider){
 
           $mdThemingProvider.theme('default')
-              .primaryPalette('pink')
-              .accentPalette('indigo');
+              .primaryPalette('indigo')
+              .accentPalette('pink');
 
           $mdIconProvider
               .defaultIconSet("./assets/svg/avatars.svg", 128)
