@@ -3,12 +3,12 @@
 
 # TEAM
 
-  <name> -- <role> -- <twitter>
+  Kenan -- Builder -- @tactwork
 
 # THANKS
 
-  <name>
+  Angular Material, Web Starter Kit, Google Web Fonts, Firebase, Subl3 and Wbond Team, & every other open source team. <3
 
 # TECHNOLOGY COLOPHON
 
-  HTML5, CSS3
+  HTML5, CSS3, JS
